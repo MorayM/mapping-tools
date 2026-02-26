@@ -1,3 +1,4 @@
+/* eslint-disable obsidianmd/ui/sentence-case */
 import { App, PluginSettingTab, Setting } from "obsidian";
 import type OMapsFetcherPlugin from "./main";
 
@@ -30,6 +31,7 @@ export class OMapsFetcherSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName("Search radius (m)")
+			 
 			.setDesc("Distance in meters for Overpass 'around' query.")
 			.addText((text) =>
 				text

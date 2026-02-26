@@ -1,3 +1,4 @@
+import { requestUrl } from "obsidian";
 import type { OverpassResponse, OverpassElement } from "../types";
 
 const DEFAULT_TAGS = ["name", "amenity", "shop", "tourism"];
@@ -27,17 +28,19 @@ export async function queryOverpass(
 		? buildUnfilteredQuery(lat, lon, radiusMeters)
 		: buildFilteredQuery(lat, lon, radiusMeters);
 
-	const res = await fetch(endpoint, {
+	const res = await requestUrl({
+		url: endpoint,
 		method: "POST",
 		headers: { "Content-Type": "application/x-www-form-urlencoded" },
 		body: "data=" + encodeURIComponent(query),
+		throw: false,
 	});
 
-	if (!res.ok) {
-		throw new Error(`Overpass API error: ${res.status} ${res.statusText}`);
+	if (res.status < 200 || res.status >= 300) {
+		throw new Error(`Overpass API error: ${res.status}`);
 	}
 
-	const data = (await res.json()) as OverpassResponse;
+	const data = res.json as OverpassResponse;
 	if (!data.elements || !Array.isArray(data.elements)) {
 		throw new Error("Invalid Overpass response");
 	}

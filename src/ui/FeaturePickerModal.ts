@@ -20,6 +20,7 @@ export class FeaturePickerModal extends Modal {
 	}
 
 	onOpen(): void {
+		// eslint-disable-next-line obsidianmd/ui/sentence-case
 		this.titleEl.setText("Select OSM feature");
 		const listEl = this.contentEl.createDiv({ cls: "omaps-fetcher-list omaps-fetcher-scroll" });
 		for (const el of this.items) {

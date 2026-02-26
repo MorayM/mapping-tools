@@ -73,7 +73,7 @@ export async function updateFrontmatter(
 	const out: string[] = [];
 	let replacedCoordinates = false;
 	let seenGeoKey = false;
-	const quoteVal = (v: string) => (/[:\[\]#\n]/.test(v) ? `"${v.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"` : v);
+	const quoteVal = (v: string) => (/[:[\]#\n]/.test(v) ? `"${v.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"` : v);
 
 	for (const line of lines) {
 		// Indented line or empty: keep as-is (multiline / list value)

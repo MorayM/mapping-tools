@@ -44,13 +44,15 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 	}
 
 	if (elements.length === 0) {
+		// eslint-disable-next-line obsidianmd/ui/sentence-case
 		new Notice("No OSM features found in radius.");
 		return;
 	}
 
 	new FeaturePickerModal(plugin.app, elements, (selected) => {
 		const block = formatAppendBlock(selected);
-		plugin.app.vault.process(view.file!, (body) => body + block);
+		void plugin.app.vault.process(view.file!, (body) => body + block);
+		// eslint-disable-next-line obsidianmd/ui/sentence-case
 		new Notice("OSM feature appended.");
 	}).open();
 }

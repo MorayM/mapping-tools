@@ -15,7 +15,7 @@ export default class OMapsFetcherPlugin extends Plugin {
 				const view = this.app.workspace.getActiveViewOfType(MarkdownView);
 				if (view?.file) {
 					if (!checking) {
-						captureLocationFromGeoLink(this);
+						void captureLocationFromGeoLink(this);
 					}
 					return true;
 				}
