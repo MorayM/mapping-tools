@@ -1,7 +1,8 @@
 {
-	"name": "obsidian-sample-plugin",
+	"name": "obsidian-omaps-fetcher",
 	"version": "1.0.0",
 	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
+    "author": "Moray Macdonald",
 	"main": "main.js",
 	"type": "module",
 	"scripts": {

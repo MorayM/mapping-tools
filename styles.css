@@ -1,8 +1,20 @@
-/*
+.omaps-fetcher-list {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.omaps-fetcher-scroll {
+	max-height: 60vh;
+	overflow-y: auto;
+}
 
-If your plugin does not need CSS, delete this file.
+.omaps-fetcher-row {
+	padding: 6px 8px;
+	border-radius: 4px;
+	cursor: pointer;
+}
 
-*/
+.omaps-fetcher-row:hover {
+	background: var(--interactive-hover);
+}
