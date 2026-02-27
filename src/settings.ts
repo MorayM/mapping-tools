@@ -7,13 +7,21 @@ export interface OMapsFetcherSettings {
 	overpassEndpoint: string;
 	geoLinkProperty: string;
 	searchAllFeatures: boolean;
+	addressPartOrder: string[];
 }
+
+const DEFAULT_ADDRESS_PART_ORDER = [
+	"housenumber", "housename", "street", "place", "unit", "door", "floor", "flats",
+	"block", "block_number", "plot", "postbox", "hamlet", "suburb", "subdistrict",
+	"district", "city", "county", "state", "province", "postcode", "country",
+];
 
 export const DEFAULT_SETTINGS: OMapsFetcherSettings = {
 	radiusMeters: 20,
 	overpassEndpoint: "https://overpass-api.de/api/interpreter",
 	geoLinkProperty: "geo",
 	searchAllFeatures: false,
+	addressPartOrder: [...DEFAULT_ADDRESS_PART_ORDER],
 };
 
 export class OMapsFetcherSettingTab extends PluginSettingTab {
@@ -78,6 +86,23 @@ export class OMapsFetcherSettingTab extends PluginSettingTab {
 					.setValue(this.plugin.settings.searchAllFeatures)
 					.onChange(async (value) => {
 						this.plugin.settings.searchAllFeatures = value;
+						await this.plugin.saveSettings();
+					})
+			);
+
+		new Setting(containerEl)
+			.setName("Address part order")
+			.setDesc("Comma-separated list of addr part names for {=osm:address=}. Used when addr:full is not set. Default: housenumber, street, city, postcode, country, …")
+			.addText((text) =>
+				text
+					.setPlaceholder("housenumber, street, city, postcode, country")
+					.setValue(this.plugin.settings.addressPartOrder.join(", "))
+					.onChange(async (value) => {
+						const order = value
+							.split(",")
+							.map((s) => s.trim().toLowerCase())
+							.filter(Boolean);
+						this.plugin.settings.addressPartOrder = order.length > 0 ? order : [...DEFAULT_ADDRESS_PART_ORDER];
 						await this.plugin.saveSettings();
 					})
 			);

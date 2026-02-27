@@ -51,7 +51,9 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 
 	new FeaturePickerModal(plugin.app, elements, (selected) => {
 		void plugin.app.vault.process(view.file!, (body) => {
-			const { content } = applyOsmTemplate(body, selected);
+			const { content } = applyOsmTemplate(body, selected, {
+				addressPartOrder: plugin.settings.addressPartOrder,
+			});
 			return content;
 		});
 		// eslint-disable-next-line obsidianmd/ui/sentence-case

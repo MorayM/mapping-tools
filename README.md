@@ -69,6 +69,9 @@ These do not map directly to a single tag.
 
   - If the feature has **no tags**, `{=osm:osm_tags=}` is left unchanged.
 
+- `{=osm:address=}`  
+  - Replaced with a single-line address built from the feature’s `addr:*` tags. If `addr:full` is present, that value is used (trimmed, newlines turned into spaces). Otherwise, address parts are assembled in the order set in **Settings → Address part order**, separated by comma and space. If there are no address tags, the placeholder is left unchanged.
+
 ### Placeholder behaviour
 
 - Placeholders are processed across the entire note content, including frontmatter.
@@ -86,6 +89,7 @@ Under **Settings → Community plugins → Mapping tools** you can configure:
 - **Search everything**:
   - Off: only returns elements with common tags like `name`, `amenity`, `shop`, `tourism`.
   - On: returns all OSM elements within the radius.
+- **Address part order**: Comma-separated list of addr part names (e.g. `housenumber`, `street`, `city`, `postcode`, `country`). Used when building `{=osm:address=}` from `addr:*` tags when `addr:full` is not set.
 
 ## Privacy and network
 
