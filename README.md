@@ -72,6 +72,9 @@ These do not map directly to a single tag.
 - `{=osm:address=}`  
   - Replaced with a single-line address built from the feature’s `addr:*` tags. If `addr:full` is present, that value is used (trimmed, newlines turned into spaces). Otherwise, address parts are assembled in the order set in **Settings → Address part order**, separated by comma and space. If there are no address tags, the placeholder is left unchanged.
 
+- `{=osm:map_icon=}`  
+  - Replaced with a Lucide icon name (kebab-case, e.g. `coffee`, `hotel`) for the feature type, for use in the map view’s icon property. Uses amenity, shop, tourism, then building (when no other applies), historic, highway, man_made. Fallback: `map-pin`.
+
 ### Placeholder behaviour
 
 - Placeholders are processed across the entire note content, including frontmatter.

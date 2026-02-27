@@ -1,4 +1,5 @@
 import type { OverpassElement } from "../types";
+import { osmTagsToLucideIcon } from "./osmMapIcon";
 
 const PLACEHOLDER_REGEX = /\{=osm:([^}=]+)=\}/g;
 
@@ -83,6 +84,11 @@ export function applyOsmTemplate(
 				return formatted;
 			}
 			return match;
+		}
+
+		if (key === "map_icon") {
+			replaced++;
+			return osmTagsToLucideIcon(tags);
 		}
 
 		if (!tags) return match;
