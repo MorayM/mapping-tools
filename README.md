@@ -1,4 +1,4 @@
-# Mapping tools
+# OSM Fetcher
 
 Capture location data from `geo:` links in your notes, fetch nearby OpenStreetMap (OSM) features via Overpass, and insert details into the note using simple placeholders.
 
@@ -28,7 +28,7 @@ Capture location data from `geo:` links in your notes, fetch nearby OpenStreetMa
 
 ## OSM placeholders
 
-Placeholders let you insert fields from the selected OSM feature directly into your note content.
+Placeholders let you insert fields from the selected OSM feature directly into your note content. If you've used my other plugin [OMDb Fetcher](https://github.com/MorayM/omdb-fetcher) then this will be familiar to you!
 
 ### Basic syntax
 
@@ -84,7 +84,7 @@ These do not map directly to a single tag.
 
 ## Settings
 
-Under **Settings → Community plugins → Mapping tools** you can configure:
+Under **Settings → Community plugins → OSM Fetcher** you can configure:
 
 - **Search radius (m)**: Distance in meters for the Overpass `around` query.
 - **Overpass API endpoint**: URL of the Overpass interpreter. Leave the default unless you use your own instance.
@@ -107,5 +107,5 @@ Basic commands for local development:
 - `npm run dev` — build in watch mode.
 - `npm run build` — type-check and build a production bundle.
 
-To use a local build, copy `main.js`, `manifest.json`, and `styles.css` (if present) into your vault’s `.obsidian/plugins/mapping-tools/` folder and reload Obsidian.
+To use a local build, copy `main.js`, `manifest.json`, and `styles.css` (if present) into your vault’s `.obsidian/plugins/osm-fetcher/` folder and reload Obsidian.
 

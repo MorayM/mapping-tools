@@ -1,5 +1,5 @@
 {
-	"name": "mapping-tools",
+	"name": "osm-fetcher",
 	"version": "1.0.0",
 	"description": "Capture location from geo links in your notes and load feature information from OSM.",
     "author": "Moray Macdonald",

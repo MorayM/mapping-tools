@@ -1,6 +1,6 @@
 {
-	"id": "mapping-tools",
-	"name": "Mapping Tools",
+	"id": "osm-fetcher",
+	"name": "OSM Fetcher",
 	"version": "1.0.0",
 	"minAppVersion": "1.11.7",
 	"description": "Capture location from geo links in your notes and load feature information from OSM.",
