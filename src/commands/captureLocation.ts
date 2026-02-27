@@ -4,8 +4,8 @@ import { parseGeoLink } from "../utils/geo";
 import { updateFrontmatter } from "../utils/frontmatter";
 import { queryOverpass } from "../utils/overpass";
 import { FeaturePickerModal } from "../ui/FeaturePickerModal";
-import { formatAppendBlock } from "../utils/appendFeature";
 import type { OverpassElement } from "../types";
+import { applyOsmTemplate } from "../utils/osmTemplate";
 
 export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Promise<void> {
 	const view = plugin.app.workspace.getActiveViewOfType(MarkdownView);
@@ -50,8 +50,10 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 	}
 
 	new FeaturePickerModal(plugin.app, elements, (selected) => {
-		const block = formatAppendBlock(selected);
-		void plugin.app.vault.process(view.file!, (body) => body + block);
+		void plugin.app.vault.process(view.file!, (body) => {
+			const { content } = applyOsmTemplate(body, selected);
+			return content;
+		});
 		// eslint-disable-next-line obsidianmd/ui/sentence-case
 		new Notice("OSM feature appended.");
 	}).open();
