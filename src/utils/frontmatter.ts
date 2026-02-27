@@ -47,9 +47,8 @@ export interface UpdateFrontmatterOptions {
 }
 
 /**
- * Update frontmatter: set coordinates, set geo link property only if missing.
- * Existing frontmatter is preserved verbatim (original lines and values); only
- * the coordinates line and optionally the geo line are updated or appended.
+ * Update frontmatter: set coordinates and geo link property only if missing or empty.
+ * Existing non-empty values are preserved; empty keys get our value; missing keys are appended.
  */
 export async function updateFrontmatter(
 	content: string,
@@ -87,12 +86,21 @@ export async function updateFrontmatter(
 			continue;
 		}
 		const key = m[1].trim();
+		const value = (m[2] ?? "").trim();
 		if (key === "coordinates") {
-			out.push(`coordinates: ${quoteVal(opts.coordinates)}`);
+			if (value !== "") {
+				out.push(line);
+			} else {
+				out.push(`coordinates: ${quoteVal(opts.coordinates)}`);
+			}
 			replacedCoordinates = true;
 		} else if (key === opts.geoLinkKey) {
+			if (value !== "") {
+				out.push(line);
+			} else {
+				out.push(`${opts.geoLinkKey}: ${quoteVal(opts.geoLink)}`);
+			}
 			seenGeoKey = true;
-			out.push(line);
 		} else {
 			out.push(line);
 		}
