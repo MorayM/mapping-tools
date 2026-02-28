@@ -6,5 +6,6 @@
 	"description": "Capture location from geo links in your notes and load feature information from OSM.",
 	"author": "Moray Macdonald",
     "authorUrl": "https://github.com/moraym",
-	"isDesktopOnly": false
+	"isDesktopOnly": false,
+	"styles": ["styles.css"]
 }

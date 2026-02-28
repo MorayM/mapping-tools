@@ -35,6 +35,7 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 	await plugin.app.vault.modify(view.file, newContent);
 
 	let elements: OverpassElement[];
+	new Notice("Querying Overpass API…");
 	try {
 		elements = await queryOverpass(
 			plugin.settings.overpassEndpoint,

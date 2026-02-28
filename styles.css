@@ -1,0 +1,17 @@
+/* OSM Fetcher: feature picker list */
+.omaps-fetcher-list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.omaps-fetcher-row {
+	min-height: 44px;
+	padding: 12px 14px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.omaps-fetcher-row:hover {
+	background-color: var(--background-modifier-hover);
+}
