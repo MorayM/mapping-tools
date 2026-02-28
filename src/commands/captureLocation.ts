@@ -1,7 +1,7 @@
 import { MarkdownView, Notice } from "obsidian";
 import type OMapsFetcherPlugin from "../main";
 import { parseGeoLink } from "../utils/geo";
-import { updateFrontmatter } from "../utils/frontmatter";
+import { parseFrontmatter, removeGeoLinkFromBody, updateFrontmatter } from "../utils/frontmatter";
 import { queryOverpass } from "../utils/overpass";
 import { FeaturePickerModal } from "../ui/FeaturePickerModal";
 import type { OverpassElement } from "../types";
@@ -15,6 +15,8 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 	}
 
 	const content = await plugin.app.vault.read(view.file);
+	const parsed = parseFrontmatter(content);
+	const geoInBody = parseGeoLink(parsed.body);
 	const geo = parseGeoLink(content);
 	if (!geo) {
 		new Notice("No geo link found in this note.");
@@ -22,11 +24,14 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 	}
 
 	const coordinatesStr = `${geo.lat}, ${geo.lon}`;
-	const newContent = await updateFrontmatter(content, {
+	let newContent = await updateFrontmatter(content, {
 		coordinates: coordinatesStr,
 		geoLink: geo.rawLink,
 		geoLinkKey: plugin.settings.geoLinkProperty,
 	});
+	if (plugin.settings.deleteGeoLinkFromBodyAfterCapture && geoInBody) {
+		newContent = removeGeoLinkFromBody(newContent, geo.rawLink);
+	}
 	await plugin.app.vault.modify(view.file, newContent);
 
 	let elements: OverpassElement[];

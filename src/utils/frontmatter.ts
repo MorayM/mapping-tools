@@ -37,6 +37,26 @@ export function parseFrontmatter(content: string): ParsedFrontmatter {
 	return { fields, body, hadFrontmatter };
 }
 
+/**
+ * Remove the first occurrence of rawLink from the note body only.
+ * If no frontmatter, remove from full content.
+ */
+export function removeGeoLinkFromBody(content: string, rawLink: string): string {
+	const parsed = parseFrontmatter(content);
+	if (!parsed.hadFrontmatter) {
+		return content.replace(rawLink, "");
+	}
+	const firstDash = content.indexOf("---");
+	const afterFirst = content.slice(firstDash + 3);
+	const endDash = afterFirst.indexOf("---");
+	let bodyStart = firstDash + 3 + endDash + 3;
+	while (bodyStart < content.length && content[bodyStart] === "\n") {
+		bodyStart++;
+	}
+	const newBody = parsed.body.replace(rawLink, "");
+	return content.slice(0, bodyStart) + newBody + content.slice(bodyStart + parsed.body.length);
+}
+
 /** Top-level key line: key at start (no leading space), then colon */
 const KEY_LINE = /^([^:\s][^:]*):\s*(.*)$/;
 

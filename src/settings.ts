@@ -6,6 +6,7 @@ export interface OMapsFetcherSettings {
 	radiusMeters: number;
 	overpassEndpoint: string;
 	geoLinkProperty: string;
+	deleteGeoLinkFromBodyAfterCapture: boolean;
 	searchAllFeatures: boolean;
 	addressPartOrder: string[];
 }
@@ -20,6 +21,7 @@ export const DEFAULT_SETTINGS: OMapsFetcherSettings = {
 	radiusMeters: 20,
 	overpassEndpoint: "https://overpass-api.de/api/interpreter",
 	geoLinkProperty: "geo",
+	deleteGeoLinkFromBodyAfterCapture: false,
 	searchAllFeatures: false,
 	addressPartOrder: [...DEFAULT_ADDRESS_PART_ORDER],
 };
@@ -74,6 +76,18 @@ export class OMapsFetcherSettingTab extends PluginSettingTab {
 					.setValue(this.plugin.settings.geoLinkProperty)
 					.onChange(async (value) => {
 						this.plugin.settings.geoLinkProperty = value?.trim() || "geo";
+						await this.plugin.saveSettings();
+					})
+			);
+
+		new Setting(containerEl)
+			.setName("Delete geo link from note body after capture")
+			.setDesc("After capturing, remove the geo: link from the note body. Links in frontmatter are never removed.")
+			.addToggle((toggle) =>
+				toggle
+					.setValue(this.plugin.settings.deleteGeoLinkFromBodyAfterCapture)
+					.onChange(async (value) => {
+						this.plugin.settings.deleteGeoLinkFromBodyAfterCapture = value;
 						await this.plugin.saveSettings();
 					})
 			);
