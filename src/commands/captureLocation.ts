@@ -35,6 +35,7 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 	await plugin.app.vault.modify(view.file, newContent);
 
 	let elements: OverpassElement[];
+	// eslint-disable-next-line obsidianmd/ui/sentence-case
 	new Notice("Querying Overpass API…");
 	try {
 		elements = await queryOverpass(
