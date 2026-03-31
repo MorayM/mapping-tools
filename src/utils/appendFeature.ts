@@ -24,8 +24,9 @@ function valueToYaml(v: unknown, indent: string): string {
 		}
 		return "\n" + lines.join("\n");
 	}
-	// eslint-disable-next-line @typescript-eslint/no-base-to-string
-	return String(v);
+	// We've already narrowed the type to a primitive, so
+	// anything else is safe to convert to string directly
+	return String(v as string | number | boolean | bigint | symbol);
 }
 
 export function elementToYaml(el: OverpassElement): string {

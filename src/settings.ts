@@ -1,4 +1,3 @@
-/* eslint-disable obsidianmd/ui/sentence-case */
 import { App, PluginSettingTab, Setting } from "obsidian";
 import type OMapsFetcherPlugin from "./main";
 
@@ -56,7 +55,7 @@ export class OMapsFetcherSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName("Overpass API endpoint")
-			.setDesc("Overpass interpreter URL. Leave default unless you use your own instance.")
+			.setDesc("Overpass interpreter url. Leave default unless you use your own instance.")
 			.addText((text) =>
 				text
 					.setPlaceholder("https://overpass-api.de/api/interpreter")
@@ -72,7 +71,7 @@ export class OMapsFetcherSettingTab extends PluginSettingTab {
 			.setDesc("Property name for the geo: link in frontmatter.")
 			.addText((text) =>
 				text
-					.setPlaceholder("geo")
+					.setPlaceholder("Geo")
 					.setValue(this.plugin.settings.geoLinkProperty)
 					.onChange(async (value) => {
 						this.plugin.settings.geoLinkProperty = value?.trim() || "geo";
@@ -109,7 +108,7 @@ export class OMapsFetcherSettingTab extends PluginSettingTab {
 			.setDesc("Comma-separated list of addr part names for {=osm:address=}. Used when addr:full is not set. Default: housenumber, street, city, postcode, country, …")
 			.addText((text) =>
 				text
-					.setPlaceholder("housenumber, street, city, postcode, country")
+					.setPlaceholder("Housenumber, street, city, postcode, country")
 					.setValue(this.plugin.settings.addressPartOrder.join(", "))
 					.onChange(async (value) => {
 						const order = value
