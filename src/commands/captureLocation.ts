@@ -35,7 +35,6 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 	await plugin.app.vault.modify(view.file, newContent);
 
 	let elements: OverpassElement[];
-	// eslint-disable-next-line obsidianmd/ui/sentence-case
 	new Notice("Querying Overpass API…");
 	try {
 		elements = await queryOverpass(
@@ -51,7 +50,6 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 	}
 
 	if (elements.length === 0) {
-		// eslint-disable-next-line obsidianmd/ui/sentence-case
 		new Notice("No OSM features found in radius.");
 		return;
 	}
@@ -63,7 +61,7 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 			});
 			return content;
 		});
-		// eslint-disable-next-line obsidianmd/ui/sentence-case
+		 
 		new Notice("OSM feature appended.");
 	}).open();
 }

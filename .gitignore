@@ -5,6 +5,8 @@
 *.iml
 .idea
 
+.cursor
+
 # npm
 node_modules
 
