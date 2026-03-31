@@ -24,7 +24,7 @@ export async function captureLocationFromGeoLink(plugin: OMapsFetcherPlugin): Pr
 	}
 
 	const coordinatesStr = `${geo.lat}, ${geo.lon}`;
-	let newContent = await updateFrontmatter(content, {
+	let newContent = updateFrontmatter(content, {
 		coordinates: coordinatesStr,
 		geoLink: geo.rawLink,
 		geoLinkKey: plugin.settings.geoLinkProperty,

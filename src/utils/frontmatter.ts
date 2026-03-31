@@ -70,10 +70,10 @@ export interface UpdateFrontmatterOptions {
  * Update frontmatter: set coordinates and geo link property only if missing or empty.
  * Existing non-empty values are preserved; empty keys get our value; missing keys are appended.
  */
-export async function updateFrontmatter(
+export function updateFrontmatter(
 	content: string,
 	opts: UpdateFrontmatterOptions
-): Promise<string> {
+): string {
 	const firstDash = content.indexOf("---");
 	if (firstDash !== 0) {
 		// No frontmatter: create new block with our keys only
